@@ -14,7 +14,7 @@ class Entity:
 	def move(self, nx:int, ny:int, dungeon):
 		newX, newY = self.x + nx, self.y+ny
 		print("if youre seeing this it mesans its trying to move")
-		if dungeon[newX][newY]== 0:
+		if dungeon[newX][newY] == 0:
 			self.x =newX
 			self.y = newY
 			print (f"you moved to ({self.x}{self.y})")
