@@ -2,9 +2,9 @@ from typing import Tuple
 
 class Entity:
     '''Defines entities''' 
-    def __init__(self, x:int, y:int, colour:Tuple[int, int, int], health:int, strength:int):
-        self.x = x
-        self.y = y
+    def __init__(self, pPos:Tuple[int, int], colour:Tuple[int, int, int], health:int, strength:int):
+        self.x = pPos[0]
+        self.y = pPos[1]
         self.colour = colour
         self.health = health
         self.strength = strength
@@ -18,10 +18,10 @@ class Entity:
         # Ensure the new position is within bounds of the dungeon
         if 0 <= newX < len(dungeon[0]) and 0 <= newY < len(dungeon):
             # Check if it's a walkable space (floor)
-            if dungeon[newY][newX] == 0:
+            if dungeon[newY][newX] == ".":
                 self.x, self.y = newX, newY
                 print(f"You moved to [{self.x}, {self.y}]")  # Debugging print
-            elif dungeon[newY][newX] == 1:  # Check if it's a wall
+            elif dungeon[newY][newX] == "#":  # Check if it's a wall
                 print("That's a wall.")
             else:  # Should never reach here
                 print("That's probably the void. How did you get there?")

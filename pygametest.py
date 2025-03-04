@@ -1,13 +1,14 @@
 import pygame
 
 from entityConfig import Entity
+from mapConfig import Room, WALL, FLOOR
 
 # Initialize Pygame
 pygame.init()
 
 # Constants
 TILE_SIZE = 32
-MAP_WIDTH, MAP_HEIGHT = 10, 10
+MAP_WIDTH, MAP_HEIGHT = 25, 15
 SCREEN_WIDTH, SCREEN_HEIGHT = MAP_WIDTH * TILE_SIZE, MAP_HEIGHT * TILE_SIZE
 
 # Colors
@@ -17,22 +18,15 @@ GRAY = (100, 100, 100)
 BLUE = (0, 0, 255)
 
 # Dungeon Map (0 = Floor, 1 = Wall)
-dungeon = [
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 0, 1, 1, 1, 1, 1, 1, 0, 1],
-    [1, 0, 1, 0, 0, 0, 0, 1, 0, 1],
-    [1, 0, 1, 0, 1, 1, 0, 1, 0, 1],
-    [1, 0, 1, 0, 1, 1, 0, 1, 0, 1],
-    [1, 0, 0, 0, 0, 0, 0, 1, 0, 1],
-    [1, 1, 1, 1, 1, 1, 0, 1, 0, 1],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-]
+dungeon = [[WALL for _ in range(MAP_WIDTH)] for _ in range(MAP_HEIGHT)]
+
+roomtest = Room(8, 8, 3, 3)
+roomtest.addWalls()
+roomtest.placeInDungeon(dungeon)
 
 #Initialize player
-
-player = Entity (1,1, BLUE, 100, 5)
+plrPos = roomtest.validSpawn(dungeon)
+player = Entity (plrPos, BLUE, 100, 5)
 
 # Pygame Window
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
@@ -43,9 +37,9 @@ def draw_map():
     for y in range(MAP_HEIGHT):
         for x in range(MAP_WIDTH):
             rect = pygame.Rect(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE)
-            if dungeon[y][x] == 1:
+            if dungeon[y][x] == WALL:
                 pygame.draw.rect(screen, GRAY, rect)  # Wall
-            else:
+            elif dungeon[y][x] == FLOOR:
                 pygame.draw.rect(screen, WHITE, rect)  # Floor
 
 def draw_entities():
