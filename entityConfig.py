@@ -1,23 +1,29 @@
 from typing import Tuple
 
-
 class Entity:
-	'''Defines entities''' 
-	def __init__(self, x:int, y:int, colour:Tuple[int, int, int], health:int, strength:int, ):
+    '''Defines entities''' 
+    def __init__(self, x:int, y:int, colour:Tuple[int, int, int], health:int, strength:int):
+        self.x = x
+        self.y = y
+        self.colour = colour
+        self.health = health
+        self.strength = strength
 
-		self.x = x
-		self.y = y
-		self.colour = colour
-		self.health = health
-		self.strength = strength
+    def move(self, dx, dy, dungeon):
+        # Calculate new positions
+        newX, newY = self.x + dx, self.y + dy
+        
+        print(f"Trying to move to [{newX}, {newY}]")  # Debugging print
 
-	def move(self, nx:int, ny:int, dungeon):
-		newX, newY = self.x + nx, self.y+ny
-		print("if youre seeing this it mesans its trying to move")
-		if dungeon[newX][newY] == 0:
-			self.x =newX
-			self.y = newY
-			print (f"you moved to ({self.x}{self.y})")
-		else:
-			print("you cant go there faggot")
-
+        # Ensure the new position is within bounds of the dungeon
+        if 0 <= newX < len(dungeon[0]) and 0 <= newY < len(dungeon):
+            # Check if it's a walkable space (floor)
+            if dungeon[newY][newX] == 0:
+                self.x, self.y = newX, newY
+                print(f"You moved to [{self.x}, {self.y}]")  # Debugging print
+            elif dungeon[newY][newX] == 1:  # Check if it's a wall
+                print("That's a wall.")
+            else:  # Should never reach here
+                print("That's probably the void. How did you get there?")
+        else:
+            print("You can't move out of bounds!")  # Debugging print
