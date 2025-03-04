@@ -1,5 +1,8 @@
 import pygame
+<<<<<<< HEAD
 from entityConfig import Entity
+=======
+>>>>>>> 8bc473c8837c883abb0725040e5a55999a410e88
 
 # Initialize Pygame
 pygame.init()
@@ -29,10 +32,15 @@ dungeon = [
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
 ]
 
+<<<<<<< HEAD
 #Initialize player
 
 player = Entity (1,1, BLUE, 100, 5)
 
+=======
+# Player Position
+player_x, player_y = 1, 1
+>>>>>>> 8bc473c8837c883abb0725040e5a55999a410e88
 
 # Pygame Window
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
@@ -48,20 +56,37 @@ def draw_map():
             else:
                 pygame.draw.rect(screen, WHITE, rect)  # Floor
 
+<<<<<<< HEAD
 def draw_entities():
     #does what it says on the tin
     pygame.draw.rect(screen, player.colour, pygame.Rect(player.x * TILE_SIZE, player.y * TILE_SIZE, TILE_SIZE, TILE_SIZE))
 
+=======
+def draw_player():
+    """Draws the player on the screen."""
+    rect = pygame.Rect(player_x * TILE_SIZE, player_y * TILE_SIZE, TILE_SIZE, TILE_SIZE)
+    pygame.draw.rect(screen, BLUE, rect)
+>>>>>>> 8bc473c8837c883abb0725040e5a55999a410e88
 
 # Game Loop
 running = True
 while running:
+<<<<<<< HEAD
     
+=======
+    screen.fill(BLACK)
+    
+    draw_map()
+    draw_player()
+    
+    pygame.display.flip()
+>>>>>>> 8bc473c8837c883abb0725040e5a55999a410e88
     
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
         elif event.type == pygame.KEYDOWN:
+<<<<<<< HEAD
             if event.key == pygame.K_UP:
                 player.move(0,-1, dungeon)
             elif event.key == pygame.K_DOWN:
@@ -77,5 +102,20 @@ while running:
     draw_entities()
     
     pygame.display.flip()
+=======
+            new_x, new_y = player_x, player_y
+            if event.key == pygame.K_UP:
+                new_y -= 1
+            elif event.key == pygame.K_DOWN:
+                new_y += 1
+            elif event.key == pygame.K_LEFT:
+                new_x -= 1
+            elif event.key == pygame.K_RIGHT:
+                new_x += 1
+            
+            # Check collision with walls
+            if dungeon[new_y][new_x] == 0:
+                player_x, player_y = new_x, new_y
+>>>>>>> 8bc473c8837c883abb0725040e5a55999a410e88
 
 pygame.quit()
