@@ -70,7 +70,7 @@ def generate_dungeon():
     """Generates a dungeon with rooms and hallways."""
     dungeon = [[WALL for _ in range(MAP_WIDTH)] for _ in range(MAP_HEIGHT)]
     rooms = []
-    max_rooms = 6  # Adjust as needed
+    max_rooms = 12 # Adjust as needed
 
     for _ in range(max_rooms):
         width = random.randint(5, 10)
@@ -96,6 +96,7 @@ def generate_dungeon():
     # Set exit in the last room
     ex, ey = rooms[-1].center()
     dungeon[ey][ex] = EXIT
+
 
     return dungeon
 

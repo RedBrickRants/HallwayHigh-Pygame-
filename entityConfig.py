@@ -18,7 +18,7 @@ class Entity:
         # Ensure the new position is within bounds of the dungeon
         if 0 <= newX < len(dungeon[0]) and 0 <= newY < len(dungeon):
             # Check if it's a walkable space (floor)
-            if dungeon[newY][newX] == ".":
+            if dungeon[newY][newX] == "." or dungeon[newY][newX] == "P" or dungeon[newY][newX] == "E":
                 self.x, self.y = newX, newY
                 print(f"You moved to [{self.x}, {self.y}]")  # Debugging print
             elif dungeon[newY][newX] == "#":  # Check if it's a wall
