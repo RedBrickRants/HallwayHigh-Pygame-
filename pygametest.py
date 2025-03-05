@@ -8,7 +8,7 @@ pygame.init()
 
 # Constants
 TILE_SIZE = 32
-MAP_WIDTH, MAP_HEIGHT = 25, 15
+MAP_WIDTH, MAP_HEIGHT = 25, 20
 SCREEN_WIDTH, SCREEN_HEIGHT = MAP_WIDTH * TILE_SIZE, MAP_HEIGHT * TILE_SIZE
 
 # Colors
@@ -20,7 +20,7 @@ BLUE = (0, 0, 255)
 # Dungeon Map (0 = Floor, 1 = Wall)
 dungeon = [[WALL for _ in range(MAP_WIDTH)] for _ in range(MAP_HEIGHT)]
 
-roomtest = Room(8, 8, 3, 3)
+roomtest = Room(20, 12, 5, 5)
 roomtest.addWalls()
 roomtest.placeInDungeon(dungeon)
 
@@ -41,6 +41,8 @@ def draw_map():
                 pygame.draw.rect(screen, GRAY, rect)  # Wall
             elif dungeon[y][x] == FLOOR:
                 pygame.draw.rect(screen, WHITE, rect)  # Floor
+            else:
+                pygame.draw.rect(screen, BLACK, rect) #test
 
 def draw_entities():
     #does what it says on the tin
