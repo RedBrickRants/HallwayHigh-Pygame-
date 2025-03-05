@@ -22,9 +22,7 @@ class Room:
 		self.layout = [[FLOOR for _ in range(width)]for _ in range(height)]
 		self.addWalls()
 
-		print (self.layout)
-
-
+	
 	def addWalls(self):
 		for i in range(self.width):
 			self.layout[0][i] = WALL
